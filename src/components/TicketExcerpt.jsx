@@ -1,25 +1,15 @@
 import React from "react";
 
 import {
-  Button,
-  defaultTheme,
   Flex,
-  Provider,
-  SearchField,
-  View,
-  MenuTrigger,
-  ActionButton,
-  Menu,
-  Item,
   Well,
   Link,
   Badge,
   StatusLight,
-  Meter,
 } from "@adobe/react-spectrum";
 
 import Alert from "@spectrum-icons/workflow/Alert";
-import { getPriorityColorCode, getTypeColorCode } from "../utils/colorCodeUtils";
+import { getPriorityColorCode, getStatusColorCode, getTypeColorCode } from "../utils/colorCodeUtils";
 
 const TicketExcerpt = ({ data }) => {
 
@@ -30,7 +20,10 @@ const TicketExcerpt = ({ data }) => {
       <Flex direction={"column"} gap={"size-200"}>
         <Flex alignItems={"center"} justifyContent={"space-between"}>
           <Link href={`tickets/${title}`}>{title}</Link>
-          <Alert aria-label="Negative Alert" color={getPriorityColorCode(priority)} />
+          <Flex alignItems={"center"} gap={"size-100"}>
+            <Badge variant={getStatusColorCode(status)}>{status}</Badge>
+            <Alert aria-label="Negative Alert" color={getPriorityColorCode(priority)} />
+          </Flex>
         </Flex>
         <StatusLight variant={getTypeColorCode(type)}>{type}</StatusLight>
       </Flex>

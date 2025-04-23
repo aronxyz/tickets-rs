@@ -89,55 +89,56 @@ const SingleTicket = () => {
         </Flex>
       </Flex>
       <Divider size="S" />
-      <Grid
-        columns={{
-          base: ["1fr"],
-          S: ["3fr", "1fr"],
-        }}
-        alignItems={"start"}
-        gap={"size-300"}
-        marginY={"size-300"}
-      >
-        <Well>
-          <p>{description}</p>
-        </Well>
-        <Well minWidth={"size-3000"}>
-          <LabeledValue
-            label="Priority"
-            value={
-              <View paddingTop={"size-50"} paddingBottom={"size-75"}>
-                <Flex alignItems={"center"}>
-                  <Alert
-                    marginX={"size-150"}
-                    aria-label="Negative Alert"
-                    color={getPriorityColorCode(priority)}
-                    size="S"
-                  />
-                  <span>{priority}</span>
-                </Flex>
-              </View>
-            }
-          />
-          <Divider size="S" marginY={"size-100"} />
-          <LabeledValue
-            label="Type"
-            value={<StatusLight variant={getTypeColorCode(type)}>{type}</StatusLight>}
-          />
-          <Divider size="S" marginY={"size-100"} />
-          <LabeledValue
-            label="Status"
-            value={
-              <View paddingTop={"size-50"} paddingBottom={"size-75"}>
-                <Badge variant={getStatusColorCode(status)}>{status}</Badge>
-              </View>
-            }
-          />
-          <Divider size="S" marginY={"size-100"} />
-          <View paddingTop={"size-50"} paddingBottom={"size-75"}>
-            <Meter label="Progress" value={progress} />
-          </View>
-        </Well>
-      </Grid>
+      <View paddingY={"size-300"}>
+        <Grid
+          columns={{
+            base: ["1fr"],
+            S: ["3fr", "1fr"],
+          }}
+          alignItems={"start"}
+          gap={"size-300"}
+        >
+          <Well>
+            <p>{description}</p>
+          </Well>
+          <Well minWidth={"size-3000"}>
+            <LabeledValue
+              label="Priority"
+              value={
+                <View paddingTop={"size-50"} paddingBottom={"size-75"}>
+                  <Flex alignItems={"center"}>
+                    <Alert
+                      marginX={"size-150"}
+                      aria-label="Negative Alert"
+                      color={getPriorityColorCode(priority)}
+                      size="S"
+                    />
+                    <span>{priority}</span>
+                  </Flex>
+                </View>
+              }
+            />
+            <Divider size="S" marginY={"size-100"} />
+            <LabeledValue
+              label="Type"
+              value={<StatusLight variant={getTypeColorCode(type)}>{type}</StatusLight>}
+            />
+            <Divider size="S" marginY={"size-100"} />
+            <LabeledValue
+              label="Status"
+              value={
+                <View paddingTop={"size-50"} paddingBottom={"size-75"}>
+                  <Badge variant={getStatusColorCode(status)}>{status}</Badge>
+                </View>
+              }
+            />
+            <Divider size="S" marginY={"size-100"} />
+            <View paddingTop={"size-50"} paddingBottom={"size-75"}>
+              <Meter label="Progress" value={progress} />
+            </View>
+          </Well>
+        </Grid>
+      </View>
     </div>
   );
 };

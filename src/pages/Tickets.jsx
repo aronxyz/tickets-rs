@@ -1,25 +1,16 @@
 import React from "react";
 import {
   Button,
-  defaultTheme,
   Flex,
-  Provider,
-  SearchField,
   View,
-  MenuTrigger,
   ActionButton,
-  Menu,
   Item,
-  Well,
-  Link,
-  Badge,
-  StatusLight,
-  Meter,
   Divider,
   DialogTrigger,
-  Section,
   Text,
   Grid,
+  ToastQueue,
+  TagGroup,
 } from "@adobe/react-spectrum";
 import TicketExcerpt from "../components/TicketExcerpt";
 import TicketForm from "../components/TicketForm";
@@ -27,84 +18,93 @@ import Close from "@spectrum-icons/workflow/Close";
 
 import { tickets } from "../db";
 import { filterTickets } from "../utils/filteringUtils";
-import TypeFilter from "../components/filters/TypeFilter";
-import PriorityFilter from "../components/filters/PriorityFilter";
-import StatusFilter from "../components/filters/StatusFilter";
+
+import {
+  getCoreRowModel,
+  getFacetedRowModel,
+  getFacetedUniqueValues,
+  getFilteredRowModel,
+  useReactTable,
+} from "@tanstack/react-table";
+import { columns } from "../utils/columns";
+import Filter from "../components/filters/Filter";
+import FiltersSummary from "../components/filters/FiltersSummary";
 
 const Tickets = () => {
-
-  let [selected, setSelected] = React.useState(new Set(["middle"]));
-  let [rows, setRows] = React.useState(tickets);
-
-  const filters = {
-    title: '',
-    type: '',
-    priority: 'high',
-    status: '',
+  
+  const [columnFilters, setColumnFilters] = React.useState([]);
+  const handleFilterChange = (columnId, value) => {
+    const column = table.getColumn(columnId);
+    column?.setFilterValue(value); // this will trigger onColumnFiltersChange
   };
 
-  React.useEffect(() => {
-    setRows(filterTickets(rows, filters))
-  }, [selected])
+  const table = useReactTable({
+    data: tickets,
+    columns: columns,
+    state: {
+      columnFilters, // <- your controlled filter state
+    },
+    onColumnFiltersChange: setColumnFilters, // <- updates your state
+    getCoreRowModel: getCoreRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    getFacetedRowModel: getFacetedRowModel(),
+    getFacetedUniqueValues: getFacetedUniqueValues()
+  });
 
-  console.log(tickets);
+
   return (
     <>
-      <Flex wrap="wrap-reverse" gap={"size-100"} marginTop={"size-300"}>
+      <Flex
+        wrap="wrap-reverse"
+        gap={"size-200"}
+        marginTop={"size-300"}
+        marginBottom={"size-200"}
+      >
         <Flex
           direction={{ base: "column", M: "row" }}
           gap={"size-100"}
           flexGrow={1}
         >
-          <SearchField
-            aria-label="Search"
-            onSubmit={() => alert("dd")}
-            width={"100%"}
-          />
+          <Filter column={table.getColumn("title")} onChange={handleFilterChange} />
           <Flex gap={"size-100"}>
-            <TypeFilter />
-            <PriorityFilter />
-            <StatusFilter />
-            <MenuTrigger>
-                <ActionButton>Sort</ActionButton>
-                <Menu
-                  selectionMode="single"
-                  selectedKeys={selected}
-                  onSelectionChange={setSelected}
-                >
-                  <Section title="Created at">
-                    <Item key="newest">Newest</Item>
-                    <Item key="older">Older</Item>
-                  </Section>
-                </Menu>
-              </MenuTrigger>
+            <Filter filterVariant="select" column={table.getColumn("type")} onChange={handleFilterChange} label="Type" />
+            <Filter filterVariant="select" column={table.getColumn("priority")} onChange={handleFilterChange} label="Priority" />
+            <Filter filterVariant="select" column={table.getColumn("status")} onChange={handleFilterChange} label="Status" />
           </Flex>
         </Flex>
         <DialogTrigger>
-          <Button variant="accent" alignSelf={"start"}>New</Button>
+          <Button
+            variant="accent"
+            alignSelf={"start"}
+            width={{ base: "100%", S: "size-900" }}
+          >
+            New
+          </Button>
           {(close) => <TicketForm close={close} heading="Create ticket" />}
         </DialogTrigger>
       </Flex>
-      {selected && (
-        <>
-          <Divider marginY={"size-200"} size="S" />
-          <View>
-            <Flex alignItems={"center"} gap={"size-75"}>
-              <p style={{ margin: 0 }}>
-                21 results for <strong>private</strong> sorted by{" "}
-                <strong>priority</strong>
-              </p>
-              <ActionButton>
-                <Close />
-                <Text>Clear filters</Text>
-              </ActionButton>
-            </Flex>
-          </View>
-        </>
-      )}
-      <Divider size="S" marginY={"size-200"} />
-      <View>
-        <Grid columns={{ base: ["1fr"], S: ["1fr", "1fr"] }} columnGap={"size-100"} rowGap={"size-50"}>{rows.map(ticket => (<TicketExcerpt key={ticket.title} data={ticket} />))}</Grid>
+      {columnFilters.length > 0 && <FiltersSummary tableInstance={table} columnFilters={columnFilters} />}
+      <Divider size="S" />
+      <View paddingY={"size-300"}>
+        <Grid
+          columns={{ base: ["1fr"], S: ["1fr", "1fr"] }}
+          columnGap={"size-100"}
+          rowGap={"size-50"}
+        >
+          {table.getRowModel().rows.map((row) => (
+            <TicketExcerpt key={row.id} data={row.original} />
+          ))}
+        </Grid>
+        <Button
+          onPress={() =>
+            ToastQueue.positive("Toast is done!", {
+              timeout: 5000,
+            })
+          }
+          variant="primary"
+        >
+          Show toast
+        </Button>
       </View>
     </>
   );

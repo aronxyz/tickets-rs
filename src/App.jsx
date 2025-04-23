@@ -16,6 +16,7 @@ import {
   Meter,
   Text,
   Divider,
+  ToastContainer,
 } from "@adobe/react-spectrum";
 import Alert from "@spectrum-icons/workflow/Alert";
 import React from "react";
@@ -51,6 +52,7 @@ function App() {
           </Route>
         </Routes>
       </View>
+      <ToastContainer placement="top end" />
     </Provider>
   );
 }
