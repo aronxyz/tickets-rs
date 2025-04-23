@@ -1,0 +1,185 @@
+{
+    "tickets": [
+      {
+        "id": "GzhkIn24dKGWASDBAQ2by",
+        "title": "Fix login issue",
+        "description": "Users are unable to log in with valid credentials.",
+        "priority": "high",
+        "type": "bug",
+        "status": "open",
+        "progress": 0.1
+      },
+      {
+        "id": "90HYTZLsmfKG4yZIIwXC8",
+        "title": "Add dark mode",
+        "description": "Implement dark mode toggle for UI.",
+        "priority": "medium",
+        "type": "feature",
+        "status": "in-progress",
+        "progress": 0.5
+      },
+      {
+        "id": "h3_1jfnLUpEK2ydFs-0sY",
+        "title": "Improve performance",
+        "description": "Optimize page loading time for dashboard.",
+        "priority": "high",
+        "type": "improvement",
+        "status": "in-review",
+        "progress": 0.85
+      },
+      {
+        "id": "EjZ4_h42V5_-n7bMfQE92",
+        "title": "Fix broken image",
+        "description": "Broken image on homepage under the hero section.",
+        "priority": "low",
+        "type": "bug",
+        "status": "completed",
+        "progress": 1
+      },
+      {
+        "id": "FaHCRxpFaOSUsCwB8eiv8",
+        "title": "Add password reset",
+        "description": "Enable password reset for users via email link.",
+        "priority": "medium",
+        "type": "feature",
+        "status": "blocked",
+        "progress": 0.25
+      },
+      {
+        "id": "0iixNqrnBqOFbS--U0yNg",
+        "title": "Update form validation",
+        "description": "Enhance validation messages on the contact form.",
+        "priority": "low",
+        "type": "improvement",
+        "status": "in-progress",
+        "progress": 0.45
+      },
+      {
+        "id": "hMfo2889zAGoT6FeTXTjU",
+        "title": "Fix alignment issue",
+        "description": "Text misalignment on mobile view.",
+        "priority": "low",
+        "type": "bug",
+        "status": "open",
+        "progress": 0
+      },
+      {
+        "id": "svDGLOu5isAo1cC2XgrYj",
+        "title": "Enable multi-language support",
+        "description": "Allow users to switch between English and Spanish.",
+        "priority": "high",
+        "type": "feature",
+        "status": "open",
+        "progress": 0.05
+      },
+      {
+        "id": "j2Mx0UCbhPbT9j-nTtMzw",
+        "title": "Add loading spinner",
+        "description": "Show loading spinner during API calls.",
+        "priority": "medium",
+        "type": "improvement",
+        "status": "in-review",
+        "progress": 0.75
+      },
+      {
+        "id": "TA-0NyqXF5AxKAwCLnEps",
+        "title": "Fix footer overlap",
+        "description": "Footer overlaps content on smaller screens.",
+        "priority": "medium",
+        "type": "bug",
+        "status": "blocked",
+        "progress": 0.3
+      },
+      {
+        "id": "ZKst4LLUJ-V8__vWKGEcB",
+        "title": "New onboarding flow",
+        "description": "Create a guided onboarding process for new users.",
+        "priority": "high",
+        "type": "feature",
+        "status": "in-progress",
+        "progress": 0.6
+      },
+      {
+        "id": "f61Dcj4eVv5_xlxKhR1J-",
+        "title": "Refactor sidebar",
+        "description": "Clean up sidebar component for better readability.",
+        "priority": "low",
+        "type": "improvement",
+        "status": "completed",
+        "progress": 1
+      },
+      {
+        "id": "SNUhL1SPcy1hddrS5Mk14",
+        "title": "Fix redirect bug",
+        "description": "Users get stuck in redirect loop on logout.",
+        "priority": "high",
+        "type": "bug",
+        "status": "open",
+        "progress": 0.15
+      },
+      {
+        "id": "OHc68xRfk6-MSCRhmDRoh",
+        "title": "Add analytics tracking",
+        "description": "Integrate Google Analytics for page view tracking.",
+        "priority": "medium",
+        "type": "feature",
+        "status": "in-review",
+        "progress": 0.8
+      },
+      {
+        "id": "73qKKDI2WmE4T4Of5NHyB",
+        "title": "Fix tooltip overflow",
+        "description": "Tooltips are overflowing outside the container.",
+        "priority": "low",
+        "type": "bug",
+        "status": "in-progress",
+        "progress": 0.35
+      },
+      {
+        "id": "2D3oG9EQI-CkSPOiW9rIY",
+        "title": "Add export to CSV",
+        "description": "Allow exporting report data as CSV.",
+        "priority": "medium",
+        "type": "feature",
+        "status": "blocked",
+        "progress": 0.2
+      },
+      {
+        "id": "YpALb3b6K80sL8HOg1YbZ",
+        "title": "Improve search results",
+        "description": "Refine algorithm for better search accuracy.",
+        "priority": "high",
+        "type": "improvement",
+        "status": "open",
+        "progress": 0.1
+      },
+      {
+        "id": "iDPr-trbboVaiDK1Adstc",
+        "title": "Fix typo in FAQ",
+        "description": "There's a typo in the FAQ section.",
+        "priority": "low",
+        "type": "bug",
+        "status": "completed",
+        "progress": 1
+      },
+      {
+        "id": "2jOulSEqHwr8Tzj7_42UH",
+        "title": "Add user avatars",
+        "description": "Display avatars in the user list.",
+        "priority": "medium",
+        "type": "feature",
+        "status": "in-progress",
+        "progress": 0.4
+      },
+      {
+        "id": "yXj-g_jdHxXVMR1BEirJ4",
+        "title": "Refactor CSS",
+        "description": "Clean up legacy CSS for maintainability.",
+        "priority": "low",
+        "type": "improvement",
+        "status": "in-review",
+        "progress": 0.9
+      }
+    ]
+  }
+  
