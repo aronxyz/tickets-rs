@@ -52,7 +52,7 @@ function App() {
           </Route>
         </Routes>
       </View>
-      <ToastContainer placement="top end" />
+      <ToastContainer placement="top" />
     </Provider>
   );
 }
