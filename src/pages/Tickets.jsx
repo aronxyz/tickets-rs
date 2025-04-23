@@ -19,77 +19,53 @@ import {
   DialogTrigger,
   Section,
   Text,
+  Grid,
 } from "@adobe/react-spectrum";
 import TicketExcerpt from "../components/TicketExcerpt";
 import TicketForm from "../components/TicketForm";
 import Close from "@spectrum-icons/workflow/Close";
-const Tickets = () => {
-  let [submittedText, setSubmittedText] = React.useState(null);
-  let [action, setAction] = React.useState(null);
-  let [selected, setSelected] = React.useState(new Set(["middle"]));
 
-  console.log(selected);
+import { tickets } from "../db";
+import { filterTickets } from "../utils/filteringUtils";
+import TypeFilter from "../components/filters/TypeFilter";
+import PriorityFilter from "../components/filters/PriorityFilter";
+import StatusFilter from "../components/filters/StatusFilter";
+
+const Tickets = () => {
+
+  let [selected, setSelected] = React.useState(new Set(["middle"]));
+  let [rows, setRows] = React.useState(tickets);
+
+  const filters = {
+    title: '',
+    type: '',
+    priority: 'high',
+    status: '',
+  };
+
+  React.useEffect(() => {
+    setRows(filterTickets(rows, filters))
+  }, [selected])
+
+  console.log(tickets);
   return (
     <>
-      <Flex gap={"size-100"} marginTop={"size-300"}>
+      <Flex wrap="wrap-reverse" gap={"size-100"} marginTop={"size-300"}>
         <Flex
           direction={{ base: "column", M: "row" }}
           gap={"size-100"}
           flexGrow={1}
         >
           <SearchField
-            maxWidth={576}
-            width={"100%"}
             aria-label="Search"
-            onSubmit={setSubmittedText}
+            onSubmit={() => alert("dd")}
+            width={"100%"}
           />
           <Flex gap={"size-100"}>
-            <View>
-              <MenuTrigger>
-                <ActionButton>Type</ActionButton>
-                <Menu
-                  selectionMode="single"
-                  selectedKeys={selected}
-                  onSelectionChange={setSelected}
-                >
-                  <Item key="bug">Bug</Item>
-                  <Item key="feature">Feature</Item>
-                  <Item key="improvement">Improvement</Item>
-                </Menu>
-              </MenuTrigger>
-            </View>
-            <View>
-              <MenuTrigger>
-                <ActionButton>Priority</ActionButton>
-                <Menu
-                  selectionMode="single"
-                  selectedKeys={selected}
-                  onSelectionChange={setSelected}
-                >
-                  <Item key="low">Low</Item>
-                  <Item key="medium">Medium</Item>
-                  <Item key="high">High</Item>
-                </Menu>
-              </MenuTrigger>
-            </View>
-            <View>
-              <MenuTrigger>
-                <ActionButton>Status</ActionButton>
-                <Menu
-                  selectionMode="single"
-                  selectedKeys={selected}
-                  onSelectionChange={setSelected}
-                >
-                  <Item key="open">Open</Item>
-                  <Item key="in-progress">In Progress</Item>
-                  <Item key="blocked">Blocked</Item>
-                  <Item key="in-review">In Review</Item>
-                  <Item key="completed">Completed</Item>
-                </Menu>
-              </MenuTrigger>
-            </View>
-            <View>
-              <MenuTrigger>
+            <TypeFilter />
+            <PriorityFilter />
+            <StatusFilter />
+            <MenuTrigger>
                 <ActionButton>Sort</ActionButton>
                 <Menu
                   selectionMode="single"
@@ -102,29 +78,33 @@ const Tickets = () => {
                   </Section>
                 </Menu>
               </MenuTrigger>
-            </View>
           </Flex>
         </Flex>
         <DialogTrigger>
-          <Button variant="accent">New</Button>
+          <Button variant="accent" alignSelf={"start"}>New</Button>
           {(close) => <TicketForm close={close} heading="Create ticket" />}
         </DialogTrigger>
       </Flex>
       {selected && (
-        <View>
+        <>
           <Divider marginY={"size-200"} size="S" />
-          <Flex alignItems={"center"} gap={"size-75"}>
-            <p style={{margin: 0}}>
-              21 results for <strong>private</strong> sorted by{" "}
-              <strong>priority</strong>
-            </p>
-            <ActionButton><Close/><Text>Clear filters</Text></ActionButton>
-          </Flex>
-        </View>
+          <View>
+            <Flex alignItems={"center"} gap={"size-75"}>
+              <p style={{ margin: 0 }}>
+                21 results for <strong>private</strong> sorted by{" "}
+                <strong>priority</strong>
+              </p>
+              <ActionButton>
+                <Close />
+                <Text>Clear filters</Text>
+              </ActionButton>
+            </Flex>
+          </View>
+        </>
       )}
       <Divider size="S" marginY={"size-200"} />
       <View>
-        <TicketExcerpt />
+        <Grid columns={{ base: ["1fr"], S: ["1fr", "1fr"] }} columnGap={"size-100"} rowGap={"size-50"}>{rows.map(ticket => (<TicketExcerpt key={ticket.title} data={ticket} />))}</Grid>
       </View>
     </>
   );

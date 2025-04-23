@@ -47,7 +47,7 @@ function App() {
           <Route index element={<Navigate to={"tickets"} />} />
           <Route path="tickets">
             <Route index element={<Tickets />} />
-            <Route path="test" element={<SingleTicket />} />
+            <Route path=":title" element={<SingleTicket />} />
           </Route>
         </Routes>
       </View>

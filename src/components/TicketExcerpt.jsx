@@ -19,16 +19,20 @@ import {
 } from "@adobe/react-spectrum";
 
 import Alert from "@spectrum-icons/workflow/Alert";
+import { getPriorityColorCode, getTypeColorCode } from "../utils/colorCodeUtils";
 
-const TicketExcerpt = () => {
+const TicketExcerpt = ({ data }) => {
+
+  const { title, description, priority, type, status, progress } = data
+
   return (
-    <Well maxWidth={"size-3400"}>
+    <Well>
       <Flex direction={"column"} gap={"size-200"}>
         <Flex alignItems={"center"} justifyContent={"space-between"}>
-          <Link href="tickets/test">I dropped my PC</Link>
-          <Alert aria-label="Negative Alert" color="negative" />
+          <Link href={`tickets/${title}`}>{title}</Link>
+          <Alert aria-label="Negative Alert" color={getPriorityColorCode(priority)} />
         </Flex>
-        <StatusLight variant="seafoam">Hardware</StatusLight>
+        <StatusLight variant={getTypeColorCode(type)}>{type}</StatusLight>
       </Flex>
     </Well>
   );
